@@ -3,7 +3,10 @@ import { NotificationsService } from './notifications.service';
 import { ClientProxy } from '@nestjs/microservices';
 import { NOTIFICATION_MICROSERVICE_NAME } from 'src/utils/constants/microServicesName';
 
-@Controller('notifications')
+@Controller({
+  path: 'notifications',
+  version: '1',
+})
 export class NotificationsController {
   constructor(
     private readonly notificationsService: NotificationsService,
@@ -11,7 +14,7 @@ export class NotificationsController {
     private readonly notificationClient: ClientProxy,
   ) {}
 
-  @Get()
+  @Get('health-check')
   healthCheck() {
     return this.notificationsService.healthCheck();
   }

@@ -1,17 +1,26 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Controller, Get, Inject, Version } from '@nestjs/common';
 import { PollsService } from './polls.service';
 import { ClientProxy } from '@nestjs/microservices';
 import { POLL_MICROSERVICE_NAME } from 'src/utils/constants/microServicesName';
 
-@Controller('polls')
+@Controller({
+  path: 'polls',
+  version: '1',
+})
 export class PollsController {
   constructor(
     private readonly pollsService: PollsService,
     @Inject(POLL_MICROSERVICE_NAME) private readonly pollClient: ClientProxy,
   ) {}
 
-  @Get()
+  @Get('health-check')
   healthCheck() {
+    return this.pollsService.healthCheck();
+  }
+
+  @Version('2')
+  @Get()
+  healthCheckv2() {
     return this.pollsService.healthCheck();
   }
 

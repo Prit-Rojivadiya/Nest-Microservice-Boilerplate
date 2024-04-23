@@ -20,13 +20,20 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.10.6",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/microservices": "^10.3.7",
+    "@nestjs/mongoose": "^10.0.6",
     "@nestjs/platform-express": "^10.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
-    "dynamoose": "^4.0.0",
+    "joi": "^17.12.3",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.2",
+    "nestjs-joi": "^1.10.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "save": "^2.9.0"

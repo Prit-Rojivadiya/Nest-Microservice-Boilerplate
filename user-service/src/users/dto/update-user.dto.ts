@@ -1,4 +1,29 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateUserDto } from './create-user.dto';
+import * as Joi from 'joi';
 
-export class UpdateUserDto extends PartialType(CreateUserDto) {}
+export const UpdateUserSchema = Joi.object({
+  username: Joi.string(),
+  fullName: Joi.string(),
+  age: Joi.number().min(16).max(200),
+  countryCode: Joi.string(),
+  mobile: Joi.string(),
+  isMobileVerified: Joi.boolean(),
+  email: Joi.string().email(),
+  isEmailVerified: Joi.boolean(),
+  profilePicUrl: Joi.string(),
+  roleId: Joi.string().regex(/^[0-9a-fA-F]{24}$/),
+  lastSignedInAt: Joi.date(),
+  currentSignedInAt: Joi.date(),
+  accountDeletedAt: Joi.date(),
+  myBio: Joi.string(),
+  genderId: Joi.string(),
+  uniqueUserId: Joi.string(),
+  inviteLink: Joi.string(),
+  referralCode: Joi.string(),
+  isActive: Joi.boolean(),
+  isDeleted: Joi.boolean(),
+  authKey: Joi.string(),
+  createdBy: Joi.string().regex(/^[0-9a-fA-F]{24}$/),
+  updatedBy: Joi.string().regex(/^[0-9a-fA-F]{24}$/),
+  updatedAt: Joi.date(),
+  createdAt: Joi.date(),
+}).options({ abortEarly: true });
