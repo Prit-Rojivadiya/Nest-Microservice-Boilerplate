@@ -2,8 +2,10 @@ import { Injectable } from '@nestjs/common';
 import {
   ClientProxy,
   ClientProxyFactory,
+  RpcException,
   Transport,
 } from '@nestjs/microservices';
+import { sendNotification } from 'src/utils/pushNotification/sendNotification';
 require('dotenv').config();
 
 const POLL_MICROSERVICE_TCP_PORT = Number(
@@ -53,5 +55,19 @@ export class NotificationsService {
     // );
 
     return payload?.message || 'Notification micro service working';
+  }
+
+  async pushNotificationTesting() {
+    try {
+      const message = {
+        title: 'Hello from Node.js!',
+        body: 'This is a push notification sent from a Node.js server.',
+      };
+      const token = 'DEVICE_REGISTRATION_TOKEN_OR_TOPIC_NAME';
+      await sendNotification(token, message);
+      return 'Notification sent';
+    } catch (error) {
+      throw new RpcException(error);
+    }
   }
 }

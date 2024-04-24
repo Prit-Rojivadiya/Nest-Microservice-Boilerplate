@@ -11,4 +11,9 @@ export class NotificationsController {
   checkMicroServiceHealth(@Payload() payload): any {
     return this.notificationsService.checkMicroServiceHealth(payload);
   }
+
+  @MessagePattern({ cmd: 'send-push-notification' })
+  async pushNotificationTesting() {
+    return await this.notificationsService.pushNotificationTesting();
+  }
 }
